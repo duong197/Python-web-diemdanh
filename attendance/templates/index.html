@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Điểm danh sinh viên</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Điểm danh sinh viên</h1>
+    <input type="text" id="student-id" placeholder="Nhập mã sinh viên" />
+    <button id="submit-btn">Điểm danh</button>
+
+    <div id="result"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#submit-btn').click(function() {
+                const studentId = $('#student-id').val();
+                $.post('/attendance/', {student_id: studentId}, function(data) {
+                    $('#result').html(data.status === 'success' ? 'Điểm danh thành công!' : 'Có lỗi: ' + data.message);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
